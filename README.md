@@ -1,6 +1,4 @@
 # Getting Started with Create React App
-![Image alt](https://github.com/xLeeVeNx/personalTodolist/blob/main/download.jpg)
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
