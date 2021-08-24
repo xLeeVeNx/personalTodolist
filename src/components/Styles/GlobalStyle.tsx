@@ -4,6 +4,18 @@ export const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
   }
+  
+  body {
+    font-family: 'Roboto Slab';
+    font-weight: 400;
+    
+    background-color: #121021;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Slab';
+    font-weight: 700;
+  }
 
   *,
   *::after,
@@ -50,5 +62,12 @@ export const GlobalStyle = createGlobalStyle`
 
   address {
     font-style: normal;
+  }
+  
+  .wrapper {
+    margin-top: 50px;
+    
+    display: flex;
+    justify-content: center;
   }
 `;
