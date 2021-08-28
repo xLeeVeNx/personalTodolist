@@ -1,17 +1,8 @@
 // Import libs
-import React, { useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
-import { DeleteIcon, SettingIcon } from '../Sprites';
-
-type TodolistItemPropsType = {
-	title: string,
-	id: string,
-	completed: boolean,
-	changeTodoStatus: (id: string) => void,
-	removeTodo: (id: string) => void,
-	animation?: boolean,
-};
+import { EditableTitle } from '../TodolistTitle/EditableTitle';
 
 const TodoListItem = styled.div`
   position: relative;
@@ -50,33 +41,33 @@ const TodoListCheckbox = styled.span`
   width: 15px;
   height: 15px;
 
-  border: 2px solid #8E8E8E;
+  border: 2px solid #1EA1FF;
 
   border-radius: 3px;
 `;
 
-const TodoListTitle = styled.h3`
-  margin: 0 10px 0 7px;
+type propsType = {
+	todoID: string,
+	taskID: string,
+	title: string,
+	completed: boolean,
+	changeTaskStatus: (todoID: string, taskID: string) => void,
+	removeTask: (todoID: string, taskID: string) => void,
+	editTaskTitle: (todoID: string, taskID: string, newTaskTitle: string) => void,
+	animation: boolean,
+};
 
-  font-weight: 400;
-  font-size: 14px;
-
-  color: #135156;
-`;
-
-const TodoListOptions = styled.div`
-  margin-left: auto;
-
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  max-width: 50px;
-  width: 100%;
-`;
-
-export const TodolistItem: React.FC<TodolistItemPropsType> = props => {
+export const TodolistItem: FC<propsType> = props => {
 	const [ flipInX, setFlipInX ] = useState<boolean>(false);
 	const [ bounceOutLeft, setBounceOutLeft ] = useState<boolean>(false);
+
+	const onChangeInputHandler = () => {
+		props.changeTaskStatus(props.todoID, props.taskID);
+		setFlipInX(true);
+		setTimeout(() => setFlipInX(false), 800);
+	};
+	const removeTask = () => props.removeTask(props.todoID, props.taskID);
+	const editTaskTitle = (newTaskTitle: string) => props.editTaskTitle(props.todoID, props.taskID, newTaskTitle);
 
 	return (
 		<>
@@ -86,19 +77,13 @@ export const TodolistItem: React.FC<TodolistItemPropsType> = props => {
 					<TodoListInput type="checkbox"
 					               checked={ props.completed }
 					               disabled={ flipInX }
-					               onChange={ () => {
-						               props.changeTodoStatus(props.id);
-						               setFlipInX(true);
-						               setTimeout(() => setFlipInX(false), 800);
-					               } }
+					               onChange={ onChangeInputHandler }
 					/>
-					<TodoListCheckbox />
+					<TodoListCheckbox className="checkbox" />
 				</TodoListBox>
-				<TodoListTitle className="todo__title">{ props.title }</TodoListTitle>
-				<TodoListOptions>
-					<SettingIcon />
-					<DeleteIcon id={ props.id } removeTodo={ props.removeTodo } setBounceOutLeft={ setBounceOutLeft } />
-				</TodoListOptions>
+				<EditableTitle title={ props.title } editItemTitle={ editTaskTitle } removeTask={ removeTask }
+				               setBounceOutLeft={ setBounceOutLeft }
+				/>
 			</TodoListItem>
 		</>
 	)

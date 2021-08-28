@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto Slab';
     font-weight: 400;
     
-    background-color: #121021;
+    background-color: cadetblue;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -65,9 +65,8 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   .wrapper {
-    margin-top: 50px;
+    min-height: 100vh;
     
-    display: flex;
-    justify-content: center;
+    overflow: hidden;
   }
 `;

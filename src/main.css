@@ -11,8 +11,20 @@
   animation-fill-mode: both;
 }
 
+.bounceOutLeft2 {
+  animation-name: bounceOutLeft2;
+  animation-duration: 2s;
+  animation-fill-mode: both;
+}
+
+.bounceInRight {
+  animation-name: bounceInRight;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
 .completed {
-  background-color: #622994;
+  background-color: #1EA1FF;
 }
 
 .completed .delete {
@@ -23,15 +35,34 @@
   fill: #FFFFFF;
 }
 
+.completed span {
+  display: block;
+
+  border-color: #FFFFFF;
+  background-image: url("./images/tick.svg");
+  background-repeat: no-repeat;
+  background-size: 9px;
+  background-position: center;
+}
+
 .completed .todo__title {
   color: #FFFFFF;
 
   text-decoration: line-through;
 }
 
-.tada {
-  animation-name: tada;
-  animation-duration: 1s;
+.completed input.todo__title {
+  outline: #FFFFFF 2px solid;
+}
+
+.active {
+  color: #FFFFFF !important;
+  background-color: #1EA1FF !important;
+}
+
+.bounceIn {
+  animation-name: bounceIn;
+  animation-duration: 0.75s;
   animation-fill-mode: both;
 }
 
@@ -64,33 +95,68 @@
 @keyframes bounceOutLeft {
   20% {
     opacity: 1;
-    transform: translate3d(20px, 0, 0);
+    transform: translate3d(30px, 0, 0);
   }
 
   100% {
     opacity: 0;
-    transform: translate3d(-2000px, 0, 0);
+    transform: translate3d(-700px, 0, 0);
   }
 }
 
-@keyframes tada {
-  0% {
-    transform: scale3d(1, 1, 1);
-  }
-
-  10%, 20% {
-    transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
-  }
-
-  30%, 50%, 70%, 90% {
-    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
-  }
-
-  40%, 60%, 80% {
-    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+@keyframes bounceOutLeft2 {
+  20% {
+    opacity: 1;
+    transform: translate3d(0, 20px, 0);
   }
 
   100% {
+    opacity: 0;
+    transform: translate3d(0, -2000px, 0);
+  }
+}
+
+@keyframes bounceInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(-1000px, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bounceIn {
+  100%, 20%, 40%, 60%, 80%, 0% {
+    animation-timing-function: cubic-bezier(0.215, .61, .355, 1);
+  }
+
+  0% {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  40% {
+    transform: scale3d(.9, .9, .9);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  80% {
+    transform: scale3d(.97, .97, .97);
+  }
+
+  100% {
+    opacity: 1;
     transform: scale3d(1, 1, 1);
   }
 }
